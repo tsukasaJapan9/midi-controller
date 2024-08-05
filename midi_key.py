@@ -22,6 +22,7 @@ def main():
                 if event[0] == 144:
                     # midiout.note_on(event[1], event[2])
                     midiout.note_on(event[1], VEL)
+                    print(event[1])
                 elif event[0] == 128:
                     midiout.note_off(event[1])
             time.sleep(0.001)
