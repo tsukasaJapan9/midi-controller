@@ -9,7 +9,6 @@ VEL = 127
 def main():
     m.init()
     for i in range(pygame.midi.get_count()):
-        # print("%d:%s" % (i, pygame.midi.get_device_info(i)))
         info = pygame.midi.get_device_info(i)
         print(f"{i}: {info[1]}, input({info[2]}), output({info[3]})")
 
