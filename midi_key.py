@@ -8,12 +8,23 @@ VEL = 127
 
 def main():
     m.init()
+    input, output = None, None
     for i in range(pygame.midi.get_count()):
         info = pygame.midi.get_device_info(i)
         print(f"{i}: {info[1]}, input({info[2]}), output({info[3]})")
+        if "micro" in str(info[1]) and info[2] == 1:
+            input = i
+        elif "SH-4d" in str(info[1]) and info[3] == 1:
+            output = i
 
-    midiin = m.Input(3)
-    midiout = m.Output(4)
+    print(f"use input: {input}")
+    print(f"use output: {output}")
+
+    if input is None or output is None:
+         return
+
+    midiin = m.Input(input)
+    midiout = m.Output(output)
 
     try:
         while True:

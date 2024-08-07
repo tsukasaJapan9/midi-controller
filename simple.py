@@ -28,12 +28,20 @@ melody = [
 
 def main():
     m.init()
+
+    output = None
     for i in range(pygame.midi.get_count()):
         info = pygame.midi.get_device_info(i)
         print(f"{i}: {info[1]}, input({info[2]}), output({info[3]})")
+        if "SH-4d" in str(info[1]) and info[3] == 1:
+            output = i
 
+    print(f"use output: {output}")
 
-    midiouts = [m.Output(4)]
+    if output is None:
+         return
+
+    midiouts = [m.Output(output)]
 
     try:
         for note, duration in melody:
